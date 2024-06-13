@@ -2,17 +2,28 @@ package tn.esprit.shareplate.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.esprit.shareplate.entities.Donation;
 import tn.esprit.shareplate.entities.Receipt;
+import tn.esprit.shareplate.repositories.IDonationRepository;
 import tn.esprit.shareplate.repositories.IReceiptRepository;
 
+import java.util.Date;
 import java.util.List;
 @Service
 public class ReceiptService implements IReceiptService{
     @Autowired
     private IReceiptRepository receiptRepository;
+    @Autowired
+    private IDonationRepository donationRepository;
     @Override
-    public void addReceipt(Receipt r) {
+    public void addReceipt(Receipt r, Long id) {
+        Donation donation=donationRepository.findById(id).orElse(null);
+        if (donation != null) {
+            r.setDonation(donation);
+            donation.getReceipt().add(r);
+        }
         receiptRepository.save(r);
+        donationRepository.save(donation);
     }
 
     @Override
@@ -39,5 +50,10 @@ public class ReceiptService implements IReceiptService{
     @Override
     public List<Receipt> findAllReceipt() {
         return receiptRepository.findAll();
+    }
+
+    @Override
+    public List<Receipt> getReceiptByDate(Date dateReceived) {
+        return receiptRepository.findByDateReceived(dateReceived);
     }
 }

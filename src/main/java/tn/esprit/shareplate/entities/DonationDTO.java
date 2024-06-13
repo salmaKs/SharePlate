@@ -2,21 +2,18 @@ package tn.esprit.shareplate.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class Donation implements Serializable {
+@AllArgsConstructor
+@ToString
+public class DonationDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int id;
@@ -28,16 +25,5 @@ public class Donation implements Serializable {
     public Date availability;
     public String pickupLocation;
     public String description;
-
-    @ManyToOne
-    public User donor;
-
-    @OneToMany
-    @JsonIgnore
-    public List<Review> reviews;
-
-    @OneToMany
-    @JsonIgnore
-    public List<Receipt> receipt;
-
+    public String name;
 }

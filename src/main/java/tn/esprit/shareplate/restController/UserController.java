@@ -3,11 +3,15 @@ package tn.esprit.shareplate.restController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.shareplate.entities.User;
+import tn.esprit.shareplate.entities.gouvTun;
+import tn.esprit.shareplate.entities.role;
 import tn.esprit.shareplate.services.IUserService;
 
+import javax.management.relation.Role;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 public class UserController {
     @Autowired
     private IUserService iUserService;
@@ -31,6 +35,14 @@ public class UserController {
     @GetMapping("/getallUser")
     public List<User> getAllUser(){
         return iUserService.getall();
+    }
+    @GetMapping("/getUserByRole")
+    public List<User> getUserByRole (@RequestParam role role) {return iUserService.getUserByRole(role);}
+    @GetMapping("/getUserByGouv")
+    public List<User> getUserByGouv(@RequestParam gouvTun gouvTun) {return iUserService.getUserByGouvTun(gouvTun);}
+    @GetMapping("/userExist")
+    public boolean userExist (@RequestParam String mail, @RequestParam String pwd){
+        return iUserService.UserExist(mail, pwd);
     }
 
 }

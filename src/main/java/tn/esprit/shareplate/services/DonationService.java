@@ -3,6 +3,7 @@ package tn.esprit.shareplate.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.shareplate.entities.Donation;
+import tn.esprit.shareplate.entities.donationType;
 import tn.esprit.shareplate.repositories.IDonationRepository;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class DonationService implements IDonationService {
             donation.setAvailability(d.getAvailability());
             donation.setDescription(d.getDescription());
             donation.setPickupLocation(d.getPickupLocation());
-            donation.setQuality(donation.getQuality());
+            donation.setQuantity(donation.getQuantity());
             donation.setUnit(donation.getUnit());
             donationRepository.save(donation);
         }
@@ -41,5 +42,10 @@ public class DonationService implements IDonationService {
     @Override
     public Donation getDonationById(Long id) {
         return donationRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Donation> getDonationByType(donationType donationType) {
+        return donationRepository.findByDonationType(donationType);
     }
 }

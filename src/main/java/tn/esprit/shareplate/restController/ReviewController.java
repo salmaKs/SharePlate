@@ -10,6 +10,7 @@ import tn.esprit.shareplate.services.ReviewService;
 import java.util.List;
 
 @RestController
+@CrossOrigin("*")
 public class ReviewController {
     @Autowired
     private IReviewService iReviewService;

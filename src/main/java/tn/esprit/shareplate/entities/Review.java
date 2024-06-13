@@ -21,6 +21,7 @@ public class Review implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     public User user;
+
     @ManyToOne(cascade = CascadeType.ALL)
     public Donation donation;
 }
