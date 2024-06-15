@@ -17,4 +17,5 @@ public interface IUserService {
     List<User> getUserByRole(role role);
     List<User> getUserByGouvTun(gouvTun gouvTun);
     boolean UserExist(String mail, String pwd);
+    boolean userExistAll (User user);
 }

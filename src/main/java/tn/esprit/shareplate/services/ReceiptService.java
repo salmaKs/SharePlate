@@ -19,6 +19,7 @@ public class ReceiptService implements IReceiptService{
     public void addReceipt(Receipt r, Long id) {
         Donation donation=donationRepository.findById(id).orElse(null);
         if (donation != null) {
+            donation.setQuantity(donation.getQuantity()-r.getQuantity());
             r.setDonation(donation);
             donation.getReceipt().add(r);
         }

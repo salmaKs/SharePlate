@@ -17,9 +17,9 @@ public class DonationController {
     @Autowired
     private IDonationService donationService;
 
-    @PostMapping("/addDonation")
-    public void addDonation (@RequestBody Donation donation){
-        donationService.addDonation(donation);
+    @PostMapping("/addDonation/{CIN}")
+    public void addDonation (@RequestBody Donation donation, @PathVariable int CIN){
+        donationService.addDonation(donation, CIN);
     }
     @PutMapping("/modifyDonation/{id}")
     public void modifyDonation (@RequestBody Donation donation , @PathVariable Long id){
@@ -50,6 +50,11 @@ public class DonationController {
     @GetMapping("/getDonationByType")
     public List<Donation> getDonationByType (@RequestParam donationType donationType) {
         return donationService.getDonationByType(donationType);
+    }
+
+    @GetMapping("/getDonationByCin/{CIN}")
+    public List<Donation> getDonationsByCIN (@PathVariable int CIN){
+        return donationService.getAllOfCIN(CIN);
     }
 
     private DonationDTO convertToDto(Donation donation){

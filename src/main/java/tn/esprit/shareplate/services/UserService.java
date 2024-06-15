@@ -62,4 +62,13 @@ return userRepository.findAll();
         return (user != null);
     }
 
+    @Override
+    public boolean userExistAll(User user) {
+        User existingUser = userRepository.findByNomAndPrenomAndDateNaissanceAndMailAndTelAndCIN(user.getNom(), user.getPrenom(), user.getDateNaissance(),
+                user.getMail(), user.getTel(), user.getCIN());
+        return existingUser != null;
+    }
+
+
+
 }

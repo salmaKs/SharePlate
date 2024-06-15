@@ -7,10 +7,11 @@ import tn.esprit.shareplate.entities.donationType;
 import java.util.List;
 
 public interface IDonationService {
-    void addDonation (Donation d);
+    void addDonation (Donation d, int CIN);
     void updateDonation(Donation d, Long id);
     void deleteDonation (Long id);
     List<Donation> getAll();
+    List<Donation> getAllOfCIN(int CIN);
     Donation getDonationById(Long id);
     List<Donation> getDonationByType (donationType donationType);
 }
